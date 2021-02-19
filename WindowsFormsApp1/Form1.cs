@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -15,47 +10,96 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            PenColor = "Black";
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        static readonly int PictureBoxWidth = 634;
+        static readonly int PictureBoxHeight = 355;
+        Bitmap bmp = new Bitmap(PictureBoxWidth, PictureBoxHeight);
+        private void ClearBtn_Click(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            List<Shape> shapes = new List<Shape>()
-            { 
-            new Line(),
-            new Rectangle(),
-            new Ellipse(),
-            new Triangle(),
-            new Circle(),
-            new Quadrate()
-            };
-
-            int x = 20;
-            foreach(Shape i in shapes)
-            {
-
-                i.Draw(ref bmp, 100+x, 30+x, 30+x, 30+x);
-                x+= 20;
-            }
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
             pictureBox1.Image = bmp;
         }
+
+        private void CircleBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Circle";
+        }
+
+        private void LineBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Line";
+        }
+
+        private void QuadrateBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Quadrate";
+        }
+
+        private void TriangleBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Triangle";
+        }
+
+        private void EllipseBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Ellipse";
+        }
+
+        private void RectangleBtn_Click(object sender, EventArgs e)
+        {
+            Tag = "Shapes.Rectangle";
+        }
+
+        int  iMouseX, iMouseY,PenWidth;
+        string PenColor;
+        private void ColorBtn_Click(object sender, EventArgs e)
+        {
+            ColorDialog MyDialog = new ColorDialog
+            {
+                AllowFullOpen = true,
+                ShowHelp = true
+            };
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+                PenColor = MyDialog.Color.Name;
+                button7.Text = MyDialog.Color.Name;
+            }
+        }
+
+        private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int iMouseX2 = e.Location.X;
+            int iMouseY2 = e.Location.Y;
+            if (e.Button == MouseButtons.Left)
+            {
+                int[] arr1 = { iMouseX, iMouseY, iMouseX2 - iMouseX, iMouseY2 - iMouseY };
+                if (Tag == null)
+                    Tag = "Shapes.Circle";
+                Shape shape = (Shape)Activator.CreateInstance(Type.GetType((string)Tag));
+                shape.PenWidth = PenWidth;
+                shape.PenColor = PenColor;
+                Shape _ = shape.DrawShape(ref bmp, arr1);
+                pictureBox1.Image = bmp;
+            }
+        }
+           
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            bool b =Int32.TryParse(textBox1.Text, out int x);
+            if (b==true && x>=1 && x<=100)
+            {
+                PenWidth = x;
+            }
+        }
+
+        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            iMouseX = e.Location.X;
+            iMouseY = e.Location.Y;
+        }
     }
-    
 }
 
-namespace Shapes
-{
-    using WindowsFormsApp1;
-    class Shape:Form1
-    {
-        public Pen pen = new Pen(Color.Green);
-        public virtual void Draw(ref Bitmap bmp, int x1, int x2, int x3, int x4) { }
-    }
-}
 
-             /*line.Draw(ref bmp, 120, 50, 240, 50);
-             rectangle.Draw(ref bmp, 80, 120, 80, 40);
-             ellipse.Draw(ref bmp, 50, 25, 75, 25);
-             triangle.Draw(ref bmp, 200, 100, 250, 150, 100, 100);
-             circle.Draw(ref bmp, 55, 55, 55, 55);
-             quadrate.Draw(ref bmp, 25, 25, 25, 25);*/
