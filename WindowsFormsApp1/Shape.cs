@@ -1,30 +1,18 @@
 ﻿using System.Drawing;
 using System;
+using System.Windows.Forms;
+using System.Xml.Schema;
+
 namespace Shapes
 {
-    abstract class Shape
+    abstract public class Shape
     {
-        public abstract Shape DrawShape(ref Bitmap bmp, int[] arr);
-        public int PenWidth;
-        public string PenColor;
-
-        public Pen GetPenColor()
-        {
-            Pen pen = new Pen(Color.Black, PenWidth);
-            try
-            {
-                pen.Color = Color.FromArgb(Convert.ToInt32(PenColor, 16));
-            }
-            catch (FormatException)
-            {
-                pen.Color = Color.FromName(PenColor);
-            }
-            catch
-            {
-                pen.Color = Color.FromArgb(Convert.ToInt32(PenColor, 16));
-            }
-            return pen;
-        }
+        public Bitmap Bmp { get; set; }
+        public Pen Pen { get; set; }
+        public virtual int Dropcount{ get; } = 1;
+        public virtual void Draw(int x1, int y1){}
+        public virtual void Draw(int x1, int y1, int x2, int y2){}
+        public virtual void Draw(int x1, int y1, int x2, int y2, int x3, int y3){}
     }
 }
 

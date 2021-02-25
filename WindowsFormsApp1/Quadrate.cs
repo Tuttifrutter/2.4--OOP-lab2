@@ -6,13 +6,11 @@ namespace Shapes
 {
     class Quadrate : Shape 
     {
-        public override Shape DrawShape(ref Bitmap bmp, int[] arr)
+        public override int Dropcount { get; } = 2;
+        public override void Draw(int x1, int y1, int x2, int y2)
         {
-            Pen pen = GetPenColor();
-            pen.Width = PenWidth;
-            Graphics graph = Graphics.FromImage(bmp);
-            graph.DrawRectangle(pen, arr[0], arr[1], (arr[2] + arr[3]) / 2, (arr[2] + arr[3]) / 2);
-            return new Quadrate();
+            Graphics graph = Graphics.FromImage(Bmp);
+            graph.DrawRectangle(Pen, x1, y1, x2, y2);
         }
     }
 }

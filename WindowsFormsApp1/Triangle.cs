@@ -4,27 +4,14 @@ using System.Windows.Forms;
 
 namespace Shapes
 {
-    class Triangle : Shape 
+    public class Triangle : Shape
     {
-        public override Shape DrawShape(ref Bitmap bmp, int[] arr)
+        public override int Dropcount { get; } = 3;
+        public override void Draw(int x1, int y1, int x2, int y2, int x3, int y3)
         {
-            Pen pen = GetPenColor();
-            pen.Width = PenWidth;
-            Graphics graph = Graphics.FromImage(bmp);
-            double x3, y3;
-            if (arr[0] + arr[2] > arr[1] + arr[3])
-            {
-                x3 = arr[0] + arr[2] / 2;
-                y3 = arr[1] - (arr[0] + arr[2]) * Math.Sqrt(3) / 6;
-            }
-            else
-            {
-                y3 = arr[1] + arr[3] / 2;
-                x3 = arr[0] - (arr[1] + arr[3]) * Math.Sqrt(3) / 6;
-            }
-            Point[] PointARR = { new Point(arr[0], arr[1]), new Point(arr[2] + arr[0], arr[3] + arr[1]), new Point((int)x3, (int)y3) };
-            graph.DrawPolygon(pen, PointARR);
-            return new Triangle();
+            Graphics graph = Graphics.FromImage(Bmp);
+            Point[] PointARR = { new Point(x1, y1), new Point(x2, y2), new Point(x3, y3) };
+            graph.DrawPolygon(Pen, PointARR);
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 namespace WindowsFormsApp1
 {
     using Shapes;
+    using System.Collections.Generic;
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -14,7 +16,7 @@ namespace WindowsFormsApp1
         }
         static readonly int PictureBoxWidth = 634;
         static readonly int PictureBoxHeight = 355;
-        Bitmap bmp = new Bitmap(PictureBoxWidth, PictureBoxHeight);
+        readonly Bitmap bmp = new Bitmap(PictureBoxWidth, PictureBoxHeight);
         private void ClearBtn_Click(object sender, EventArgs e)
         {
             Graphics g = Graphics.FromImage(bmp);
@@ -52,7 +54,8 @@ namespace WindowsFormsApp1
             Tag = "Shapes.Rectangle";
         }
 
-        int  iMouseX, iMouseY,PenWidth;
+        int  PenWidth;
+        List<int> drops = new List<int>();
         string PenColor;
         private void ColorBtn_Click(object sender, EventArgs e)
         {
@@ -70,21 +73,51 @@ namespace WindowsFormsApp1
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            int iMouseX2 = e.Location.X;
-            int iMouseY2 = e.Location.Y;
             if (e.Button == MouseButtons.Left)
-            {
-                int[] arr1 = { iMouseX, iMouseY, iMouseX2 - iMouseX, iMouseY2 - iMouseY };
+            {   
                 if (Tag == null)
                     Tag = "Shapes.Circle";
                 Shape shape = (Shape)Activator.CreateInstance(Type.GetType((string)Tag));
-                shape.PenWidth = PenWidth;
-                shape.PenColor = PenColor;
-                Shape _ = shape.DrawShape(ref bmp, arr1);
-                pictureBox1.Image = bmp;
+                if (shape.Dropcount*2==drops.Count)
+                { 
+                   
+                    shape.Bmp = bmp;
+                    shape.Pen = SetPenValue(PenColor, PenWidth);
+                    shape.Draw(drops[0], drops[1]);
+                    if (shape.Dropcount == 2) 
+                    {
+                        shape.Draw(drops[0], drops[1], drops[2], drops[3]);
+                    }
+                    else
+                    {
+                        shape.Draw(drops[0], drops[1], drops[2], drops[3], drops[4], drops[5]);
+                    }
+                    pictureBox1.Image = shape.Bmp;
+                    drops.Clear();
+                }
+                    
             }
         }
-           
+        
+        private Pen SetPenValue(string PC, float PW)
+        {
+            Pen pen = new Pen(Color.Black, PW);
+            try
+            {
+                pen.Color = Color.FromArgb(Convert.ToInt32(PC, 16));
+            }
+            catch (FormatException)
+            {
+                pen.Color = Color.FromName(PC);
+            }
+            catch
+            {
+                pen.Color = Color.FromArgb(Convert.ToInt32(PC, 16));
+            }
+            return pen;
+        }
+
+
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             bool b =Int32.TryParse(textBox1.Text, out int x);
@@ -96,8 +129,8 @@ namespace WindowsFormsApp1
 
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            iMouseX = e.Location.X;
-            iMouseY = e.Location.Y;
+            drops.Add(e.Location.X);
+            drops.Add(e.Location.Y);
         }
     }
 }
