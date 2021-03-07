@@ -44,6 +44,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
+            this.btnArc = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,9 +74,9 @@
             // 
             this.CircleBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("CircleBtn.BackgroundImage")));
             this.CircleBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.CircleBtn.Location = new System.Drawing.Point(12, 30);
+            this.CircleBtn.Location = new System.Drawing.Point(39, 98);
             this.CircleBtn.Name = "CircleBtn";
-            this.CircleBtn.Size = new System.Drawing.Size(58, 53);
+            this.CircleBtn.Size = new System.Drawing.Size(31, 28);
             this.CircleBtn.TabIndex = 2;
             this.CircleBtn.UseVisualStyleBackColor = true;
             this.CircleBtn.Click += new System.EventHandler(this.CircleBtn_Click);
@@ -83,9 +85,9 @@
             // 
             this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Location = new System.Drawing.Point(12, 89);
+            this.button2.Location = new System.Drawing.Point(39, 30);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(58, 53);
+            this.button2.Size = new System.Drawing.Size(30, 28);
             this.button2.TabIndex = 3;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.LineBtn_Click);
@@ -94,9 +96,9 @@
             // 
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(12, 148);
+            this.button3.Location = new System.Drawing.Point(39, 64);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(58, 53);
+            this.button3.Size = new System.Drawing.Size(31, 28);
             this.button3.TabIndex = 4;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.QuadrateBtn_Click);
@@ -105,9 +107,9 @@
             // 
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.Location = new System.Drawing.Point(12, 207);
+            this.button4.Location = new System.Drawing.Point(12, 132);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(58, 53);
+            this.button4.Size = new System.Drawing.Size(31, 26);
             this.button4.TabIndex = 5;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.TriangleBtn_Click);
@@ -116,9 +118,9 @@
             // 
             this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Location = new System.Drawing.Point(12, 266);
+            this.button5.Location = new System.Drawing.Point(13, 98);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 53);
+            this.button5.Size = new System.Drawing.Size(30, 28);
             this.button5.TabIndex = 6;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.EllipseBtn_Click);
@@ -127,9 +129,9 @@
             // 
             this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.Location = new System.Drawing.Point(12, 325);
+            this.button6.Location = new System.Drawing.Point(12, 64);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(58, 53);
+            this.button6.Size = new System.Drawing.Size(31, 28);
             this.button6.TabIndex = 7;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.RectangleBtn_Click);
@@ -154,13 +156,34 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(457, 4);
+            this.button7.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button7.Location = new System.Drawing.Point(546, -1);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(121, 20);
+            this.button7.Size = new System.Drawing.Size(32, 29);
             this.button7.TabIndex = 10;
-            this.button7.Text = "Black";
-            this.button7.UseVisualStyleBackColor = true;
+            this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.ColorBtn_Click);
+            // 
+            // btnArc
+            // 
+            this.btnArc.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnArc.BackgroundImage")));
+            this.btnArc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnArc.Location = new System.Drawing.Point(39, 132);
+            this.btnArc.Name = "btnArc";
+            this.btnArc.Size = new System.Drawing.Size(31, 26);
+            this.btnArc.TabIndex = 11;
+            this.btnArc.UseVisualStyleBackColor = true;
+            this.btnArc.Click += new System.EventHandler(this.BtnArc_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button8.Location = new System.Drawing.Point(13, 30);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(30, 28);
+            this.button8.TabIndex = 12;
+            this.button8.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -168,6 +191,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.btnArc);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
@@ -204,6 +229,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnArc;
+        private System.Windows.Forms.Button button8;
     }
 }
 

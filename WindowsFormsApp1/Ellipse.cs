@@ -1,14 +1,27 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Shapes
 {
-    class Ellipse : Shape
+    class Ellipse : Circle
     {
-        public override int Dropcount { get; } = 2;
-        public override void Draw(int x1, int y1, int x2, int y2)
+        public override int Argcount { get; } = 4;
+        public int R2;
+        public override void Draw()
+        {
+            DrawEllipse(x1, y1, R, R2);
+        }
+        public void DrawEllipse(int x1, int y1, int R, int R2)
         {
             Graphics graph = Graphics.FromImage(Bmp);
-            graph.DrawEllipse(Pen, x1, y1, x2, y2);
+            graph.DrawEllipse(Pen, x1, y1, R, R2);
+        }
+        public override void SetValue(List<int> arr)
+        {
+            base.SetValue(arr);
+            R = Math.Abs(arr[2] - arr[0]);
+            R2 = Math.Abs(arr[3] - arr[1]);
         }
     }
 }

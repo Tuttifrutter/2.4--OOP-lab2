@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             PenColor = "Black";
         }
+        public Shape mainShape = new Circle();
         static readonly int PictureBoxWidth = 634;
         static readonly int PictureBoxHeight = 355;
         readonly Bitmap bmp = new Bitmap(PictureBoxWidth, PictureBoxHeight);
@@ -26,32 +27,32 @@ namespace WindowsFormsApp1
 
         private void CircleBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Circle";
+            mainShape = new Circle();
         }
 
         private void LineBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Line";
+            mainShape = new Line();
         }
 
         private void QuadrateBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Quadrate";
+            mainShape = new Quadrate();
         }
 
         private void TriangleBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Triangle";
+            mainShape = new Triangle();
         }
 
         private void EllipseBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Ellipse";
+            mainShape = new Ellipse();
         }
 
         private void RectangleBtn_Click(object sender, EventArgs e)
         {
-            Tag = "Shapes.Rectangle";
+            mainShape = new Rectangle();
         }
 
         int  PenWidth;
@@ -66,8 +67,8 @@ namespace WindowsFormsApp1
             };
             if (MyDialog.ShowDialog() == DialogResult.OK)
             {
+                button7.BackColor = MyDialog.Color;
                 PenColor = MyDialog.Color.Name;
-                button7.Text = MyDialog.Color.Name;
             }
         }
 
@@ -75,24 +76,14 @@ namespace WindowsFormsApp1
         {
             if (e.Button == MouseButtons.Left)
             {   
-                if (Tag == null)
-                    Tag = "Shapes.Circle";
-                Shape shape = (Shape)Activator.CreateInstance(Type.GetType((string)Tag));
-                if (shape.Dropcount*2==drops.Count)
+                if (mainShape.Argcount==drops.Count)
                 { 
+                    mainShape.Bmp = bmp;
+                    mainShape.SetValue(drops);
+                    mainShape.Pen = SetPenValue(PenColor, PenWidth);
+                    mainShape.Draw();
                    
-                    shape.Bmp = bmp;
-                    shape.Pen = SetPenValue(PenColor, PenWidth);
-                    shape.Draw(drops[0], drops[1]);
-                    if (shape.Dropcount == 2) 
-                    {
-                        shape.Draw(drops[0], drops[1], drops[2], drops[3]);
-                    }
-                    else
-                    {
-                        shape.Draw(drops[0], drops[1], drops[2], drops[3], drops[4], drops[5]);
-                    }
-                    pictureBox1.Image = shape.Bmp;
+                    pictureBox1.Image = mainShape.Bmp;
                     drops.Clear();
                 }
                     
@@ -131,6 +122,11 @@ namespace WindowsFormsApp1
         {
             drops.Add(e.Location.X);
             drops.Add(e.Location.Y);
+        }
+
+        private void BtnArc_Click(object sender, EventArgs e)
+        {
+            mainShape = new Arc();
         }
     }
 }
