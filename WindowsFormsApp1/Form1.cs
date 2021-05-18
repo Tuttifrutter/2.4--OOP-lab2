@@ -15,8 +15,8 @@ namespace WindowsFormsApp1
             PenColor = "Black";
         }
         public Shape mainShape = new Circle();
-        static readonly int PictureBoxWidth = 634;
-        static readonly int PictureBoxHeight = 355;
+        static readonly int PictureBoxWidth = 1056;
+        static readonly int PictureBoxHeight = 555;
         readonly Bitmap bmp = new Bitmap(PictureBoxWidth, PictureBoxHeight);
         private void ClearBtn_Click(object sender, EventArgs e)
         {
@@ -27,31 +27,37 @@ namespace WindowsFormsApp1
 
         private void CircleBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Circle();
         }
 
         private void LineBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Line();
         }
 
         private void QuadrateBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Quadrate();
         }
 
         private void TriangleBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Triangle();
         }
 
         private void EllipseBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Ellipse();
         }
 
         private void RectangleBtn_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Rectangle();
         }
 
@@ -77,7 +83,11 @@ namespace WindowsFormsApp1
             if (e.Button == MouseButtons.Left)
             {   
                 if (mainShape.Argcount==drops.Count)
-                { 
+                {
+                    if (fillflag == true)
+                        mainShape.Brush = new SolidBrush(SetPenValue(PenColor, PenWidth).Color);
+                    else
+                        mainShape.Brush = null;
                     mainShape.Bmp = bmp;
                     mainShape.SetValue(drops);
                     mainShape.Pen = SetPenValue(PenColor, PenWidth);
@@ -126,7 +136,32 @@ namespace WindowsFormsApp1
 
         private void BtnArc_Click(object sender, EventArgs e)
         {
+            drops.Clear();
             mainShape = new Arc();
+        }
+
+        private void BtnPoint_Click(object sender, EventArgs e)
+        {
+            drops.Clear();
+            mainShape = new Point();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            drops.Clear();
+            mainShape = new Smile();
+        }
+        bool fillflag=false;
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                fillflag = true;
+            }
+            else
+            {
+                fillflag = false;
+            }
         }
     }
 }

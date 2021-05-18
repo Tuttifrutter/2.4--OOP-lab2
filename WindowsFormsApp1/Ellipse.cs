@@ -15,6 +15,8 @@ namespace Shapes
         public void DrawEllipse(int x1, int y1, int R, int R2)
         {
             Graphics graph = Graphics.FromImage(Bmp);
+            if (Brush != null)
+                graph.FillEllipse(Brush,x1,y1, R, R2);
             graph.DrawEllipse(Pen, x1, y1, R, R2);
         }
         public override void SetValue(List<int> arr)

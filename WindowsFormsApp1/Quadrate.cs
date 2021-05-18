@@ -16,6 +16,9 @@ namespace Shapes
         }
         public void DrawQuadrate(int x1, int y1, int a)
         {
+            Graphics graph = Graphics.FromImage(Bmp);
+            if (Brush != null)
+                graph.FillRectangle(Brush, x1, y1, a, a);
             base.DrawLine(x1, y1, x1 + a + Convert.ToInt32(Pen.Width), y1);
             base.DrawLine(x1, y1, x1, y1 + a + Convert.ToInt32(Pen.Width));
             base.DrawLine(x1 + a + Convert.ToInt32(Pen.Width), y1 + a + Convert.ToInt32(Pen.Width), x1 + a + Convert.ToInt32(Pen.Width), y1);

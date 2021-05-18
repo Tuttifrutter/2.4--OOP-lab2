@@ -13,6 +13,7 @@ namespace Shapes
         public string Name { get; set; }
         public Bitmap Bmp { get; set; }
         public Pen Pen { get; set; }
+        public SolidBrush Brush { get; set; }
         public abstract void Draw();
     }
 }

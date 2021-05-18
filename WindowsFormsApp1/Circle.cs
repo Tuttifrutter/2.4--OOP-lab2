@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
-using System; 
-using System.Windows.Forms;
+using System;
 using System.Collections.Generic;
 
 namespace Shapes
@@ -16,6 +15,8 @@ namespace Shapes
         public void DrawCircle(int x1, int y1, int R)
         {
             Graphics graph = Graphics.FromImage(Bmp);
+            if (Brush != null) 
+            graph.FillEllipse(Brush, Math.Abs(x1 - R), Math.Abs(y1 - R), R * 2, R * 2);
             graph.DrawEllipse(Pen, Math.Abs(x1 - R), Math.Abs(y1 - R), R * 2, R * 2);
         }
         public override void SetValue(List<int> arr)
